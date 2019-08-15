@@ -62,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
     AlertDialog.Builder builder;
     ProgressBar progress;
 
+    int mPosisi;
+
     FloatingActionMenu materialDesignFAM;
     FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3, floatingActionButton4;
 
@@ -127,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
 
         init();
         checkDirectory();
+
     }
 
     public void init() {
@@ -192,6 +195,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     public void showDialogDownload() {
         builder = new AlertDialog.Builder(this);
         //Uncomment the below code to Set the message and title from the strings.xml file
@@ -240,6 +244,7 @@ public class MainActivity extends AppCompatActivity {
         slideShowFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogFragmentTheme);
         //finally show dialogue
         slideShowFragment.show(getSupportFragmentManager(), null);
+
     }
 
     @Override
