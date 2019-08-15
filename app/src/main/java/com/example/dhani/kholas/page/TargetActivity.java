@@ -19,6 +19,8 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import com.example.dhani.kholas.R;
 import com.example.dhani.kholas.adapter.AlarmReceiver;
+import com.example.dhani.kholas.dao.entity.Bookmark;
+import com.example.dhani.kholas.dao.service.BookmarkService;
 
 public class TargetActivity extends Activity{
     TimePicker myTimePicker;
@@ -58,10 +60,18 @@ public class TargetActivity extends Activity{
             @Override
             public void onClick(View v) {
                 jml_target = target.getText().toString();
-                Intent intent = new Intent(TargetActivity.this, MainActivity.class);
-                intent.putExtra("TARGET", jml_target);
-                startActivity(intent);
-                finish();
+//                Intent intent = new Intent(TargetActivity.this, MainActivity.class);
+//                intent.putExtra("TARGET", jml_target);
+//                startActivity(intent);
+//                finish();
+
+                Bookmark bookmark = new Bookmark();
+                BookmarkService bookmarkService = new BookmarkService();
+
+                bookmark.setPage(Integer.parseInt(jml_target));
+                bookmark.setTarget(Integer.parseInt(jml_target));
+                bookmarkService.createBookmark(bookmark);
+
 
             }
         });
