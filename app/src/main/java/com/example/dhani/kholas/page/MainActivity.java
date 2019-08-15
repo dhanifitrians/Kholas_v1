@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.dhani.kholas.R;
 import com.example.dhani.kholas.adapter.SuratAdapter;
+import com.example.dhani.kholas.base.ObjectBox;
 import com.example.dhani.kholas.model.BaseSurat;
 import com.example.dhani.kholas.model.GalleryItem;
 import com.example.dhani.kholas.utils.CheckForSDCard;
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ObjectBox.init(this);
         progress = findViewById(R.id.progress);
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
