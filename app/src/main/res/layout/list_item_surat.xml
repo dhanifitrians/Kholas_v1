@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16px"
+    android:id="@+id/item_surah">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/no"
+        android:text="No."
+        android:layout_gravity="center_vertical"
+        android:layout_margin="20px"
+        android:textSize="12pt"
+        android:textStyle="bold"/>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/nama_surat"
+        android:text="Nama"
+        android:layout_margin="7px"
+        android:textSize="8pt"
+        android:textStyle="bold"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/jml_ayat"
+        android:text="Jml"
+        android:layout_margin="7px"/>
+</LinearLayout>
+</LinearLayout>

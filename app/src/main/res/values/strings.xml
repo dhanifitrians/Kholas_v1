@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">Kholas</string>
+    <string name="title_activity_welcome">Home Screen</string>
+    <string name="next">LANJUT</string>
+    <string name="skip">LEWATI</string>
+    <string name="start">MULAI</string>
+
+    <string name="slide_1_title">KHOLAS</string>
+    <string name="slide_1_desc">Kholas merupakan aplikasi Al-Quran yang dilengkapi dengan fitur reminder tilawah.Langkah sederhana Tentukan target tilawah dan baca Quran Digital</string>
+
+    <string name="slide_2_title">TARGET</string>
+    <string name="slide_2_desc">Tentukan target tilawah Anda dalam sehari</string>
+
+    <string name="slide_3_title">Baca Quran</string>
+    <string name="slide_3_desc">Baca Al-Quran Digital yang sudah disediakan di aplikasi ini. Bacaan Anda akan tercatat pada bookmark</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="tab_1">Kamu ada di halaman Surat</string>
+    <string name="tab_2">Kamu ada di halaman Juz</string>
+    <string name="tab_3">Kamu ada di halaman Bookmark</string>
+
+    <string-array name="target">
+        <item>1 Lembar</item>
+        <item>2 Lembar</item>
+        <item>3 Lembar</item>
+        <item>4 Lembar</item>
+        <item>5 Lembar</item>
+        <item>6 Lembar</item>
+        <item>7 Lembar</item>
+        <item>8 Lembar</item>
+        <item>9 Lembar</item>
+        <item>1 Juz</item>
+        <item>2 Juz</item>
+        <item>3 Juz</item>
+        <item>4 Juz</item>
+        <item>5 Juz</item>
+    </string-array>
+
+    <string name="dialog_message">Anda Harus Download Halaman Quran !</string>
+    <string name="dialog_title">Download Page</string>
+
+    <string name="download_Pdf">Download pdf</string>
+    <string name="download_Doc">Download Doc</string>
+    <string name="download_zip">Download Zip</string>
+    <string name="download_video">Download Video</string>
+    <string name="download_mp3">Download MP3</string>
+    <string name="openFolder">Open Downloaded Folder</string>
+    <string name="downloadStarted">Download Started…</string>
+    <string name="downloadCompleted">Download Completed…</string>
+    <string name="downloadFailed">Download Failed…</string>
+    <string name="downloadAgain">Download Again</string>
+</resources>
