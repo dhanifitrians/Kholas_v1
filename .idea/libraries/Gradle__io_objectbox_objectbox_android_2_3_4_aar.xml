@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: io.objectbox:objectbox-android:2.3.4@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e9279003424519063d63e260c66b6673/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e9279003424519063d63e260c66b6673/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6f608dd95c67f7ed1dbeccca531bced7/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/6f608dd95c67f7ed1dbeccca531bced7/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
