@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.example.dhani.kholas.R;
 import com.example.dhani.kholas.utils.Utils;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //Remember to implement  GalleryStripAdapter.GalleryStripCallBacks to fragment  for communication of fragment and GalleryStripAdapter
-public class SlideShowFragment extends DialogFragment implements GalleryStripAdapter.GalleryStripCallBacks {
+public class SlideShowFragment extends DialogFragment implements GalleryStripAdapter.GalleryStripCallBacks, ViewPager.OnPageChangeListener {
 
     //declare static variable which will serve as key of current position argument
     private static final String ARG_CURRENT_POSITION = "position";
@@ -50,6 +51,10 @@ public class SlideShowFragment extends DialogFragment implements GalleryStripAda
         return fragment;
     }
 
+    public void getToast(int position){
+        Toast.makeText(getContext(),"tes"+position,Toast.LENGTH_SHORT).show();
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,22 +82,27 @@ public class SlideShowFragment extends DialogFragment implements GalleryStripAda
         //set adapter to Viewpager
         mViewPagerGallery.setRotationY(180);
         mViewPagerGallery.setAdapter(mSlideShowPagerAdapter);
+        mViewPagerGallery.addOnPageChangeListener(this);
 
 
         //tell viewpager to open currently selected item and pass position of current item
         setPagePosition(mCurrentPosition);
 //        mViewPagerGallery.setCurrentItem(mCurrentPosition);
 
-
         return view;
     }
+
+
 
     //Overridden method by GalleryStripAdapter.GalleryStripCallBacks for communication on gallery strip item selected
     @Override
     public void onGalleryStripItemSelected(int position) {
         //set current item of viewpager
         mViewPagerGallery.setCurrentItem(position);
+//        Toast.makeText(getContext(),"tes"+position,Toast.LENGTH_SHORT).show();
     }
+
+
 
     @Override
     public void onDestroyView() {
@@ -331,4 +341,19 @@ public class SlideShowFragment extends DialogFragment implements GalleryStripAda
         }
     }
 
+    @Override
+    public void onPageScrolled(int i, float v, int i1) {
+
+    }
+
+    @Override
+    public void onPageSelected(int i) {
+        getToast(i);
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int i) {
+
+    }
 }

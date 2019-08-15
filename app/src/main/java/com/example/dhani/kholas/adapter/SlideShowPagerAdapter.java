@@ -1,11 +1,13 @@
 package com.example.dhani.kholas.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.dhani.kholas.model.GalleryItem;
 import com.example.dhani.kholas.R;
@@ -53,6 +55,6 @@ public class SlideShowPagerAdapter extends PagerAdapter {
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((ImageView) object);
+//        Toast.makeText(mContext,"Halaman "+position,Toast.LENGTH_SHORT).show();
     }
-
 }

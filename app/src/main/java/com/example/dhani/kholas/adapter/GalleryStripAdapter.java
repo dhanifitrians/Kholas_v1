@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.dhani.kholas.model.GalleryItem;
 import com.example.dhani.kholas.R;
@@ -72,6 +73,7 @@ public class GalleryStripAdapter extends RecyclerView.Adapter {
                 mStripCallBacks.onGalleryStripItemSelected(position);
             }
         });
+
     }
 
     @Override
