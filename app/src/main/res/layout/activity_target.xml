@@ -61,29 +61,48 @@
             android:textAlignment="center"
             android:hint="Jumlah Halaman"
             android:layout_centerHorizontal="true"/>
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kamu mau mulai dari halaman berapa"
+            android:layout_marginTop="310dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/colorPrimary"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/start_hlm"
+            android:maxLines="1"
+            android:lines="1"
+            android:maxLength="3"
+            android:inputType="number|textMultiLine"
+            android:layout_marginTop="330dp"
+            android:ems="7"
+            android:textColor="@color/colorPrimary"
+            android:textAlignment="center"
+            android:hint="Mulai Halaman"
+            android:layout_centerHorizontal="true"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Kamu mau diingetin jam berapa"
-            android:layout_marginTop="310dp"
+            android:layout_marginTop="370dp"
             android:layout_centerHorizontal="true"
             android:textColor="@color/colorPrimary"/>
         <Button
             android:id="@+id/startSetDialog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="20pt"
+            android:layout_height="20pt"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="330dp"
-            android:drawableLeft="@android:drawable/ic_lock_idle_alarm"
-            android:text=" Set Reminder" />
+            android:layout_marginTop="390dp"
+            android:drawableRight="@android:drawable/ic_lock_idle_alarm" />
         <TextView
             android:id="@+id/alarmprompt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:textAlignment="center"
-            android:layout_marginTop="385dp"
+            android:layout_marginTop="430dp"
             />
 
         <Button
