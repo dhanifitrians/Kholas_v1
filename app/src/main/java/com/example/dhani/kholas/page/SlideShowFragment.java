@@ -114,25 +114,17 @@ public class SlideShowFragment extends DialogFragment implements GalleryStripAda
 
 
         //tell viewpager to open currently selected item and pass position of current item
-//        setPagePosition(mCurrentPosition);
-//        mViewPagerGallery.setCurrentItem(mCurrentPosition);
-//        if (mPosisi != 0){
-//            mPosisi = Integer.parseInt(getActivity().getIntent().getStringExtra("Halaman"));
-//            if (mStatus == 1){
-//                mViewPagerGallery.setCurrentItem(mPosisi);
-//            }else {
-//                setPagePosition(mPosisi);
-//            }
-//
-//
-//        }
+        setPagePosition(mCurrentPosition);
+
         if (mStatus == 1){
             mViewPagerGallery.setCurrentItem(mCurrentPosition);
-        }else {
-            setPagePosition(mCurrentPosition);
         }
-
-
+        else {
+            if (mPosisi != 0){
+                mPosisi = Integer.parseInt(getActivity().getIntent().getStringExtra("Halaman"));
+                setPagePosition(mPosisi);
+            }
+        }
         return view;
     }
 
