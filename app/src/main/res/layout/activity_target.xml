@@ -111,7 +111,7 @@
             android:layout_height="150px"
             android:layout_marginTop="1600px"
             android:layout_centerHorizontal="true"
-            android:text="Mulai" />
+            android:text="Save" />
 
 
     </RelativeLayout>

@@ -1,6 +1,7 @@
 package com.example.dhani.kholas.page;
 
 import java.util.Calendar;
+import java.util.List;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -18,8 +19,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
 import com.example.dhani.kholas.R;
 import com.example.dhani.kholas.adapter.AlarmReceiver;
+import com.example.dhani.kholas.base.ObjectBox;
 import com.example.dhani.kholas.dao.entity.Bookmark;
 import com.example.dhani.kholas.dao.service.BookmarkService;
 import com.example.dhani.kholas.utils.Utils;
@@ -40,6 +44,7 @@ public class TargetActivity extends Activity{
 
     Bookmark bookmark;
     BookmarkService bookmarkService;
+    boolean status;
 
     /** Called when the activity is first created. */
     @Override
@@ -65,18 +70,42 @@ public class TargetActivity extends Activity{
             }
         });
 
-        mulai.setOnClickListener(new View.OnClickListener() {
+        findBookmark();
 
-            @Override
-            public void onClick(View v) {
-                jml_target = target.getText().toString();
-                start_halaman = start.getText().toString();
+        if (status == true){
+            mulai.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    bookmarkService.deleteBookmark(bookmark);
+                    Toast.makeText(getApplicationContext(),"Reset Success",Toast.LENGTH_SHORT).show();
+                    start.setEnabled(true);
+                    target.setEnabled(true);
+                    buttonstartSetDialog.setEnabled(true);
 
-                bookmark.setPage(Integer.parseInt(start_halaman));
-                bookmark.setTarget(Integer.parseInt(jml_target));
-                bookmarkService.createBookmark(bookmark);
-            }
-        });
+                    start.setText("");
+                    target.setText("");
+                    mulai.setText("Save");
+                    textAlarmPrompt.setText("");
+                }
+            });
+        }else {
+            mulai.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    jml_target = target.getText().toString();
+                    start_halaman = start.getText().toString();
+
+                    bookmark.setPage(Integer.parseInt(start_halaman));
+                    bookmark.setTarget(Integer.parseInt(jml_target));
+                    bookmark.setStatus(true);
+                    bookmarkService.createBookmark(bookmark);
+
+                    Intent home = new Intent(TargetActivity.this, MainActivity.class);
+                    startActivity(home);
+                    finish();
+                }
+            });
+        }
 
     }
 
@@ -137,6 +166,30 @@ public class TargetActivity extends Activity{
         alarmManager.set(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(),
                 pendingIntent);
 
+    }
+
+    public void findBookmark(){
+        //get database bookmark by status true
+        List<Bookmark> bookmarkList = bookmarkService.findBookmark();
+        if(bookmarkList.size() > 0){
+            for (int i=0;i < bookmarkList.size() ; i++){
+                if (bookmarkList.get(i).getTime() != null){
+
+                    //set value on database
+                    textAlarmPrompt.setText(bookmarkList.get(0).getTime());
+                    start.setText(Integer.toString(bookmarkList.get(0).getPage()));
+                    target.setText(Integer.toString(bookmarkList.get(0).getTarget()));
+
+                    //disable edit
+                    start.setEnabled(false);
+                    target.setEnabled(false);
+                    buttonstartSetDialog.setEnabled(false);
+
+                    mulai.setText("Reset");
+                    status = true;
+                }
+            }
+        }
     }
 
 }

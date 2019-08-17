@@ -14,6 +14,7 @@ public class Bookmark extends BaseEntity {
     public int page;
     public int target;
     public String time;
+    public int lastRead;
 
     public Bookmark() {
     }
@@ -44,5 +45,13 @@ public class Bookmark extends BaseEntity {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public int getLastRead() {
+        return lastRead;
+    }
+
+    public void setLastRead(int lastRead) {
+        this.lastRead = lastRead;
     }
 }

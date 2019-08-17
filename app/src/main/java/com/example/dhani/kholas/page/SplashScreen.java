@@ -8,8 +8,14 @@ import android.widget.LinearLayout;
 
 
 /*import com.easyandroidanimations.library.BounceAnimation;*/
+import com.example.dhani.kholas.MyObjectBox;
 import com.example.dhani.kholas.R;
+import com.example.dhani.kholas.base.ObjectBox;
 import com.wang.avi.AVLoadingIndicatorView;
+
+import java.io.IOException;
+
+import io.objectbox.BoxStore;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -20,6 +26,9 @@ boolean MY_PERMISSIONS_REQUEST_READ_CONTACTS=false;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+
+        ObjectBox.init(this);
+
         lv_loading = (LinearLayout) findViewById(R.id.lv_loading);
 
         avi= (AVLoadingIndicatorView) findViewById(R.id.avi);
@@ -37,5 +46,6 @@ boolean MY_PERMISSIONS_REQUEST_READ_CONTACTS=false;
         },2000);
 
     }
+
 
 }

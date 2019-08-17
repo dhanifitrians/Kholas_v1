@@ -15,6 +15,7 @@ public class BaseEntity implements Serializable {
     @Id
     private long id;
     private String createdDate;
+    private boolean status;
 
     public long getId() {
         return id;
@@ -30,5 +31,13 @@ public class BaseEntity implements Serializable {
 
     public void setCreatedDate(String createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

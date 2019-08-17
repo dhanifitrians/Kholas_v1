@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.dhani.kholas.R;
 import com.example.dhani.kholas.adapter.JuzAdapter;
+import com.example.dhani.kholas.base.ObjectBox;
 import com.example.dhani.kholas.model.BaseJuz;
 import com.google.gson.Gson;
 

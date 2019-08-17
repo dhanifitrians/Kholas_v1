@@ -5,7 +5,7 @@
   "entities": [
     {
       "id": "1:4734052234105648990",
-      "lastPropertyId": "8:5285616568816985537",
+      "lastPropertyId": "10:2511339610599198349",
       "name": "Bookmark",
       "properties": [
         {
@@ -27,13 +27,21 @@
         {
           "id": "8:5285616568816985537",
           "name": "time"
+        },
+        {
+          "id": "9:2562307589372572090",
+          "name": "status"
+        },
+        {
+          "id": "10:2511339610599198349",
+          "name": "lastRead"
         }
       ],
       "relations": []
     },
     {
       "id": "2:132134595754564302",
-      "lastPropertyId": "5:8378460859452730838",
+      "lastPropertyId": "6:5940798575408514147",
       "name": "BaseEntity",
       "properties": [
         {
@@ -43,6 +51,10 @@
         {
           "id": "2:6973116455882528140",
           "name": "createdDate"
+        },
+        {
+          "id": "6:5940798575408514147",
+          "name": "status"
         }
       ],
       "relations": []

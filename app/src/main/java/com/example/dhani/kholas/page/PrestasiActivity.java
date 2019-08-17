@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.dhani.kholas.R;
+import com.example.dhani.kholas.base.ObjectBox;
 
 public class PrestasiActivity extends AppCompatActivity {
 

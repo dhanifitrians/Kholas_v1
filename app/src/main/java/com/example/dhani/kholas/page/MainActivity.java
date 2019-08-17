@@ -1,9 +1,11 @@
 package com.example.dhani.kholas.page;
 
 import android.Manifest;
+import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.Image;
 import android.os.Environment;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
@@ -16,6 +18,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -24,6 +27,8 @@ import android.widget.Toast;
 import com.example.dhani.kholas.R;
 import com.example.dhani.kholas.adapter.SuratAdapter;
 import com.example.dhani.kholas.base.ObjectBox;
+import com.example.dhani.kholas.dao.entity.Bookmark;
+import com.example.dhani.kholas.dao.service.BookmarkService;
 import com.example.dhani.kholas.model.BaseSurat;
 import com.example.dhani.kholas.model.GalleryItem;
 import com.example.dhani.kholas.utils.CheckForSDCard;
@@ -68,13 +73,20 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionMenu materialDesignFAM;
     FloatingActionButton floatingActionButton1, floatingActionButton2, floatingActionButton3, floatingActionButton4;
 
+    Bookmark bookmark;
+    BookmarkService bookmarkService;
+    ImageButton buttonBookmark;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ObjectBox.init(this);
+
         progress = findViewById(R.id.progress);
+        buttonBookmark = findViewById(R.id.button_bookmark);
+
+        bookmark  = new Bookmark();
+        bookmarkService = new BookmarkService();
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -131,6 +143,14 @@ public class MainActivity extends AppCompatActivity {
 
         init();
         checkDirectory();
+        getBookmark();
+
+        buttonBookmark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                findBookmark();
+            }
+        });
 
     }
 
@@ -239,9 +259,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void onItemSelect(int position){
+    public void onItemSelect(int position, int status){
         //create fullscreen SlideShowFragment dialog
-        SlideShowFragment slideShowFragment = SlideShowFragment.newInstance(position);
+        SlideShowFragment slideShowFragment = SlideShowFragment.newInstance(position, status);
         //setUp style for slide show fragment
         slideShowFragment.setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogFragmentTheme);
         //finally show dialogue
@@ -288,4 +308,36 @@ public class MainActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
+    public void getBookmark(){
+        //get database by find bookmark with id =1
+        List<Bookmark> bookmarkList = bookmarkService.findBookmark();
+        if(bookmarkList.size() > 0){
+            for (int i=0;i < bookmarkList.size() ; i++){
+                if (bookmarkList.get(i).getTime() != null){
+                    tampiltarget.setText("Target Anda " + bookmarkList.get(0).getTarget() + " halaman");
+                }
+            }
+        }
+    }
+
+    public void findBookmark(){
+        //get database by find bookmark with id =1
+        List<Bookmark> bookmarkList = bookmarkService.findBookmark();
+        if(bookmarkList.size() > 0){
+            for (int i=0;i < bookmarkList.size() ; i++){
+                if (bookmarkList.get(i).getTime() != null){
+                    tampiltarget.setText("Target Anda " + bookmarkList.get(0).getTarget() + " halaman");
+                    int hal = bookmarkList.get(0).getPage() - 1;
+                    if (bookmarkList.get(0).getLastRead() != 0){
+                        int lastRead = bookmarkList.get(0).getLastRead() - 1;
+                        onItemSelect(lastRead, 1);
+                    }else {
+                        onItemSelect(hal, 1);
+                    }
+
+
+                }
+            }
+        }
+    }
 }

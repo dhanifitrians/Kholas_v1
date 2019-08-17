@@ -1,9 +1,14 @@
 package com.example.dhani.kholas.page;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +17,10 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.dhani.kholas.R;
+import com.example.dhani.kholas.base.ObjectBox;
+import com.example.dhani.kholas.dao.entity.Bookmark;
+import com.example.dhani.kholas.dao.entity.Bookmark_;
+import com.example.dhani.kholas.dao.service.BookmarkService;
 import com.example.dhani.kholas.utils.Utils;
 import com.example.dhani.kholas.adapter.GalleryStripAdapter;
 import com.example.dhani.kholas.adapter.SlideShowPagerAdapter;
@@ -20,11 +29,14 @@ import com.example.dhani.kholas.model.GalleryItem;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.objectbox.Box;
+
 //Remember to implement  GalleryStripAdapter.GalleryStripCallBacks to fragment  for communication of fragment and GalleryStripAdapter
 public class SlideShowFragment extends DialogFragment implements GalleryStripAdapter.GalleryStripCallBacks, ViewPager.OnPageChangeListener {
 
     //declare static variable which will serve as key of current position argument
     private static final String ARG_CURRENT_POSITION = "position";
+    private static final String ARG_CURRENT_STATUS = "status";
 
     //Declare list of GalleryItems
     List<GalleryItem> galleryItems;
@@ -34,19 +46,26 @@ public class SlideShowFragment extends DialogFragment implements GalleryStripAda
     ViewPager mViewPagerGallery;
 
     private int mCurrentPosition;
-    int mPosisi;
+    private int mStatus;
 
+    int mPosisi;
     public SlideShowFragment() {
         // Required empty public constructor
     }
 
+    Bookmark bookmark;
+    BookmarkService bookmarkService;
+    int target;
+    int startHalaman;
+
     //This method will create new instance of SlideShowFragment
-    public static SlideShowFragment newInstance(int position) {
+    public static SlideShowFragment newInstance(int position, int status) {
         SlideShowFragment fragment = new SlideShowFragment();
         //Create bundle
         Bundle args = new Bundle();
         //put Current Position in the bundle
         args.putInt(ARG_CURRENT_POSITION, position);
+        args.putInt(ARG_CURRENT_STATUS, status);
         //set arguments of SlideShowFragment
         fragment.setArguments(args);
         //return fragment instance
@@ -55,6 +74,7 @@ public class SlideShowFragment extends DialogFragment implements GalleryStripAda
 
     public void getToast(int position){
         Toast.makeText(getContext(),"tes"+position,Toast.LENGTH_SHORT).show();
+        mCurrentPosition = position;
     }
 
 
@@ -67,6 +87,7 @@ public class SlideShowFragment extends DialogFragment implements GalleryStripAda
         if (getArguments() != null) {
             //get Current selected position from arguments
             mCurrentPosition = getArguments().getInt(ARG_CURRENT_POSITION);
+            mStatus = getArguments().getInt(ARG_CURRENT_STATUS);
             //get GalleryItems from activity
             galleryItems = ((MainActivity) getActivity()).galleryItems;
         }
@@ -79,6 +100,10 @@ public class SlideShowFragment extends DialogFragment implements GalleryStripAda
         final View view = inflater.inflate(R.layout.fragment_silde_show, container, false);
         mViewPagerGallery = view.findViewById(R.id.viewPagerGallery);
 
+        bookmark  = new Bookmark();
+        bookmarkService = new BookmarkService();
+        getBookmark();
+
         //Initialise View Pager Adapter
         mSlideShowPagerAdapter = new SlideShowPagerAdapter(getContext(), galleryItems);
 
@@ -89,11 +114,22 @@ public class SlideShowFragment extends DialogFragment implements GalleryStripAda
 
 
         //tell viewpager to open currently selected item and pass position of current item
-        setPagePosition(mCurrentPosition);
+//        setPagePosition(mCurrentPosition);
 //        mViewPagerGallery.setCurrentItem(mCurrentPosition);
-        if (mPosisi != 0){
-            mPosisi = Integer.parseInt(getActivity().getIntent().getStringExtra("Halaman"));
-            setPagePosition(mPosisi);
+//        if (mPosisi != 0){
+//            mPosisi = Integer.parseInt(getActivity().getIntent().getStringExtra("Halaman"));
+//            if (mStatus == 1){
+//                mViewPagerGallery.setCurrentItem(mPosisi);
+//            }else {
+//                setPagePosition(mPosisi);
+//            }
+//
+//
+//        }
+        if (mStatus == 1){
+            mViewPagerGallery.setCurrentItem(mCurrentPosition);
+        }else {
+            setPagePosition(mCurrentPosition);
         }
 
 
@@ -363,5 +399,71 @@ public class SlideShowFragment extends DialogFragment implements GalleryStripAda
     @Override
     public void onPageScrollStateChanged(int i) {
 
+    }
+
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        Dialog dialog = new Dialog(getActivity(), getTheme()) {
+            @Override
+            public void onBackPressed() {
+                //your code
+//                Toast.makeText(getContext(),"back",Toast.LENGTH_SHORT).show();
+                int posisi = mCurrentPosition +1;
+                int sisa = target - posisi;
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                if (sisa != 0 && target != 0){
+                    builder.setMessage("Apakah anda ingin keluar? \n TARGET ANDA "+target+" HALAMAN," +
+                            "SISA "+sisa+" HALAMAN LAGI.");
+
+                    List<Bookmark> bookmarkList = bookmarkService.findBookmark();
+                    if (bookmarkList.size() > 0) {
+                        for (int i = 0; i < bookmarkList.size(); i++) {
+                            if (bookmarkList.get(i).isStatus() == true) {
+                                bookmarkList.get(0).setLastRead(posisi);
+                                bookmarkService.updateBookmark(bookmarkList);
+                            }
+                        }
+                    }
+
+                }else {
+                    builder.setMessage("Apakah anda ingin keluar?");
+                }
+
+                builder.setTitle("Konfirmasi");
+
+                builder.setCancelable(true);
+                builder.setNegativeButton("Batal", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                builder.setPositiveButton("Ya", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        getActivity().finish();
+                    }
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        };
+
+        return dialog;
+    }
+
+    public void getBookmark(){
+        //get database by find bookmark with id =1
+        List<Bookmark> bookmarkList = bookmarkService.findBookmark();
+        if(bookmarkList.size() > 0){
+            for (int i=0;i < bookmarkList.size() ; i++){
+                if (bookmarkList.get(i).getTime() != null){
+                    target = bookmarkList.get(0).getTarget();
+                    startHalaman = bookmarkList.get(0).getPage();
+                }
+            }
+        }
     }
 }

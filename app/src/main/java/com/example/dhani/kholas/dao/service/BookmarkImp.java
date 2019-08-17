@@ -10,6 +10,7 @@ import java.util.List;
  */
 public interface BookmarkImp {
     Bookmark createBookmark(Bookmark bookmark);
-    Bookmark findBookmarkById(int id);
+    Bookmark deleteBookmark(Bookmark bookmark);
     List<Bookmark> findBookmark();
+    List<Bookmark> updateBookmark(List<Bookmark> bookmarkList);
 }

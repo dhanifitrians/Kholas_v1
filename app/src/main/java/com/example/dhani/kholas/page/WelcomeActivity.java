@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.dhani.kholas.base.ObjectBox;
 import com.example.dhani.kholas.utils.PrefManager;
 import com.example.dhani.kholas.R;
 

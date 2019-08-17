@@ -10,6 +10,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dhani.kholas.R;
+import com.example.dhani.kholas.base.ObjectBox;
+
+import io.objectbox.BoxStore;
 
 public class SplashActivity extends AppCompatActivity {
 

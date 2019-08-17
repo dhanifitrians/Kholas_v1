@@ -71,7 +71,7 @@ public class SuratAdapter extends BaseAdapter {
 //                Intent intent = new Intent(vi.getContext(),SlidingActivity.class);
 //                intent.putExtra("posisi",position);
 //                vi.getContext().startActivity(intent);
-                ((MainActivity)context).onItemSelect(position);
+                ((MainActivity)context).onItemSelect(position,0);
 
             }
         });

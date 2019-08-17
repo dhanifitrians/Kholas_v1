@@ -11,6 +11,7 @@ import android.view.WindowManager;
 
 import com.example.dhani.kholas.R;
 import com.example.dhani.kholas.adapter.ViewPagerAdapter;
+import com.example.dhani.kholas.base.ObjectBox;
 import com.example.dhani.kholas.model.CurrentImage;
 
 public class SlidingActivity extends AppCompatActivity{

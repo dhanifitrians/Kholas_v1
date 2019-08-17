@@ -40,7 +40,10 @@ public class ObjectBox {
         }
     }
 
-    public static BoxStore get() { return boxStore; }
+    public static BoxStore get() {
+        if(boxStore == null);
+        return boxStore;
+    }
 
 
 }
